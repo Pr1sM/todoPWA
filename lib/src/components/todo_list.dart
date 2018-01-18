@@ -8,13 +8,16 @@ UiFactory<TodoListProps> TodoList;
 
 @Props()
 class TodoListProps extends UiProps {
+  ContainerClickedCallback onContainerClick;
   List<Todo> todos;
 }
 
 @Component()
 class TodoListComponent extends UiComponent<TodoListProps> {
   @override
-  getDefaultMap() => (newProps()..todos = []);
+  getDefaultMap() => (newProps()
+    ..onContainerClick = null
+    ..todos = []);
 
   @override
   shouldComponentUpdate(props, state) {
@@ -24,12 +27,14 @@ class TodoListComponent extends UiComponent<TodoListProps> {
 
   @override
   render() {
-    List todoContainers = props.todos.map((todo) {
-      return (TodoContainer()
-        ..todo = todo
-        ..key = todo.id)();
-    });
+    List todoContainers = props.todos.map((todo) => (TodoContainer()
+      ..onContainerClick = props.onContainerClick
+      ..todo = todo
+      ..key = todo.id)());
 
-    return (Dom.div()..className = 'list-group')(todoContainers);
+    return (Dom.div()..className = 'col')(
+      Dom.h2()('Todo List'),
+      (Dom.div()..className = 'list-group')(todoContainers),
+    );
   }
 }

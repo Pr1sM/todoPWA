@@ -20,7 +20,6 @@ class TodoTitleComponent extends UiComponent<TodoTitleProps> {
   }
 
   @override
-  render() => Dom.div()(
-        Dom.h1()('Todos ${props.todoCount > 0 ? '(${props.todoCount})' : ''}'),
-      );
+  render() =>
+      Dom.h1()('Todos ${props.todoCount > 0 ? '(${props.todoCount})' : ''}');
 }

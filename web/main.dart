@@ -10,7 +10,7 @@ void main() {
 
   TodoAppStore store = new TodoAppStore();
 
-  react_dom.render((Dom.div()..className = 'container')(
+  react_dom.render(Dom.div()(
       (TodoApp()..store = store)(),
   ), querySelector('#react_mount_point'));
 }

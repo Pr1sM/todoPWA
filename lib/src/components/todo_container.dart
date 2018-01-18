@@ -1,19 +1,25 @@
 import 'package:over_react/over_react.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:todopwa/src/models/todo.dart';
+
+typedef void ContainerClickedCallback(Uuid todoId);
 
 @Factory()
 UiFactory<TodoContainerProps> TodoContainer;
 
 @Props()
 class TodoContainerProps extends UiProps {
+  ContainerClickedCallback onContainerClick;
   Todo todo;
 }
 
 @Component()
 class TodoContainerComponent extends UiComponent<TodoContainerProps> {
   @override
-  getDefaultProps() => (newProps()..todo = null);
+  getDefaultProps() => (newProps()
+    ..onContainerClick = null
+    ..todo = null);
 
   @override
   shouldComponentUpdate(props, state) {
@@ -34,10 +40,21 @@ class TodoContainerComponent extends UiComponent<TodoContainerProps> {
       return null;
     }
 
-    return (Dom.div()..className = 'list-group-item')(
+    ClassNameBuilder builder = new ClassNameBuilder()
+      ..add('list-group-item')
+      ..add('list-group-item-success', props.todo.isComplete);
+
+    return (Dom.div()
+      ..onClick = _handleContainerClick
+      ..className = builder.toClassName())(
       Dom.h4()(props.todo.title),
-      Dom.div()(
-          '${props.todo.isComplete ? 'COMPLETE' : 'INCOMPLETE'} - ${props.todo.description}'),
+      Dom.div()('${props.todo.description}'),
     );
+  }
+
+  _handleContainerClick(_) {
+    if (props.onContainerClick != null) {
+      props.onContainerClick(props.todo.id);
+    }
   }
 }

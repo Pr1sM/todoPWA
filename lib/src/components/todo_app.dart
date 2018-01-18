@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:over_react/over_react.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:todopwa/src/components/add_todo_form.dart';
 import 'package:todopwa/src/components/title.dart';
 import 'package:todopwa/src/components/todo_list.dart';
+import 'package:todopwa/src/models/actions.dart';
 import 'package:todopwa/src/models/state.dart';
 import 'package:todopwa/src/models/store.dart';
+import 'package:todopwa/src/models/todo.dart';
 
 @Factory()
 UiFactory<TodoAppProps> TodoApp;
@@ -60,7 +63,26 @@ class TodoAppComponent
       return null;
     }
 
-    return Dom.div()((TodoTitle()..todoCount = state.appState.todos.length)(),
-        AddTodoForm()(), (TodoList()..todos = state.appState.todos)());
+    return (Dom.div()..className = 'container')(
+      (Dom.div()..className = 'row col-md-12')(
+        (TodoTitle()..todoCount = state.appState.todos.length)(),
+      ),
+      (Dom.div()..className = 'row col-md-12')(
+        (AddTodoForm()..onNewTodo = _handleNewTodo)(),
+      ),
+      (Dom.div()..className = 'row col-md-12')(
+        (TodoList()
+          ..onContainerClick = _handleToggleTodo
+          ..todos = state.appState.todos)(),
+      ),
+    );
+  }
+
+  _handleNewTodo(Todo todo) {
+    props.store.dispatch(new AddTodoAction(todo));
+  }
+
+  _handleToggleTodo(Uuid todoId) {
+    props.store.dispatch(new ToggleTodoAction(todoId));
   }
 }

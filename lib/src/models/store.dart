@@ -20,5 +20,7 @@ class TodoAppStore extends Store<TodoAppState> {
   static _loggingMiddleware(
       TodoAppStore store, TodoAppAction action, NextDispatcher next) {
     print('${new DateTime.now()}: ${action.type}');
+
+    next(action);
   }
 }
