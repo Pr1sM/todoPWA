@@ -3,6 +3,7 @@ import 'package:over_react/over_react.dart';
 import 'package:todopwa/src/models/todo.dart';
 
 typedef void ContainerClickedCallback(String todoId);
+typedef void RemoveClickedCallback(String todoId);
 
 @Factory()
 UiFactory<TodoContainerProps> TodoContainer;
@@ -10,6 +11,7 @@ UiFactory<TodoContainerProps> TodoContainer;
 @Props()
 class TodoContainerProps extends UiProps {
   ContainerClickedCallback onContainerClick;
+  RemoveClickedCallback onRemoveClick;
   Todo todo;
 }
 
@@ -18,6 +20,7 @@ class TodoContainerComponent extends UiComponent<TodoContainerProps> {
   @override
   getDefaultProps() => (newProps()
     ..onContainerClick = null
+    ..onRemoveClick = null
     ..todo = null);
 
   @override
@@ -41,19 +44,37 @@ class TodoContainerComponent extends UiComponent<TodoContainerProps> {
 
     ClassNameBuilder builder = new ClassNameBuilder()
       ..add('list-group-item')
-      ..add('list-group-item-success', props.todo.isComplete);
+      ..add('list-group-item-success', props.todo.isComplete)
+      ..add('flex-column');
 
     return (Dom.div()
       ..onClick = _handleContainerClick
       ..className = builder.toClassName())(
-      Dom.h4()(props.todo.title),
-      Dom.div()('${props.todo.description}'),
+      (Dom.div()
+        ..className =
+            'd-flex w-100 justify-content-between align-items-center')(
+        Dom.div()(
+          Dom.h4()(props.todo.title),
+          '${props.todo.description}',
+        ),
+        (Dom.div()..onClick = _handleRemoveClick)(
+          (Dom.span()
+            ..className = 'oi oi-x'
+            ..title = 'x')(),
+        ),
+      ),
     );
   }
 
   _handleContainerClick(_) {
     if (props.onContainerClick != null) {
       props.onContainerClick(props.todo.id);
+    }
+  }
+
+  _handleRemoveClick(_) {
+    if (props.onRemoveClick != null) {
+      props.onRemoveClick(props.todo.id);
     }
   }
 }

@@ -73,6 +73,7 @@ class TodoAppComponent
       (Dom.div()..className = 'row col-md-12')(
         (TodoList()
           ..onContainerClick = _handleToggleTodo
+          ..onRemoveClick = _handleRemoveTodo
           ..todos = state.appState.todos)(),
       ),
     );
@@ -84,5 +85,9 @@ class TodoAppComponent
 
   _handleToggleTodo(String todoId) {
     props.store.dispatch(new ToggleTodoAction(todoId));
+  }
+
+  _handleRemoveTodo(String todoId) {
+    props.store.dispatch(new RemoveTodoAction(todoId));
   }
 }
