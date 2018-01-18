@@ -163,6 +163,7 @@ dynamic appHandler(Request request) {
     'packages/',
     'js/',
     'css/',
+    'fonts/',
     'prod/',
     'sass/',
     'dart_sdk.js',
