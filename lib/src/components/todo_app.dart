@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:over_react/over_react.dart';
-import 'package:uuid/uuid.dart';
 
 import 'package:todopwa/src/components/add_todo_form.dart';
 import 'package:todopwa/src/components/title.dart';

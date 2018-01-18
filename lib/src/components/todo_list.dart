@@ -17,7 +17,7 @@ class TodoListProps extends UiProps {
 @Component()
 class TodoListComponent extends UiComponent<TodoListProps> {
   @override
-  getDefaultMap() => (newProps()
+  getDefaultProps() => (newProps()
     ..onContainerClick = null
     ..onEditClick = null
     ..onRemoveClick = null

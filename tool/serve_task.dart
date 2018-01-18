@@ -150,7 +150,7 @@ void startShelf(String hostname, int port) {
   shelf_io.serve(appHandler, hostname, port);
 }
 
-dynamic appHandler(Request request) {
+FutureOr<Response> appHandler(Request request) {
   String path = request.url.path;
 
   if (localHostAliases

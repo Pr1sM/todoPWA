@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 import 'package:todopwa/src/models/todo.dart';
 
 enum ActionType {
