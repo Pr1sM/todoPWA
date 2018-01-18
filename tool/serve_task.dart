@@ -44,7 +44,8 @@ Future<Null> main(List<String> arguments) async {
         allowed: ['dart2js', 'dartdevc', 'none'],
         defaultsTo: 'none',
         help: 'The Javascript compiler to use to serve the app.')
-    ..addOption('entry-point', abbr: 'o',
+    ..addOption('entry-point',
+        abbr: 'o',
         defaultsTo: 'web',
         help: 'The directory that should be served.');
   var parsedArgs = parser.parse(arguments);

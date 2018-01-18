@@ -5,8 +5,9 @@ author: Srinivas Dhanwada <dhanwads@gmail.com>
 environment:
   sdk: '>=1.23.0 <2.0.0'
 dependencies:
-  redux: ^2.1.1
   over_react: ^1.20.0
+  redux: ^2.1.1
+  uuid: ^0.5.3
 dev_dependencies:
   ansicolor: ^0.0.9
   args: ^0.13.0
