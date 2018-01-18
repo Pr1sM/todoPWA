@@ -27,10 +27,12 @@ class TodoListComponent extends UiComponent<TodoListProps> {
 
   @override
   render() {
-    List todoContainers = props.todos.map((todo) => (TodoContainer()
-      ..onContainerClick = props.onContainerClick
-      ..todo = todo
-      ..key = todo.id)());
+    List todoContainers = props.todos
+        .map((todo) => (TodoContainer()
+          ..onContainerClick = props.onContainerClick
+          ..todo = todo
+          ..key = todo.id)())
+        .toList();
 
     return (Dom.div()..className = 'col')(
       Dom.h2()('Todo List'),

@@ -1,9 +1,8 @@
 import 'package:over_react/over_react.dart';
-import 'package:uuid/uuid.dart';
 
 import 'package:todopwa/src/models/todo.dart';
 
-typedef void ContainerClickedCallback(Uuid todoId);
+typedef void ContainerClickedCallback(String todoId);
 
 @Factory()
 UiFactory<TodoContainerProps> TodoContainer;

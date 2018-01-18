@@ -28,7 +28,10 @@ class Todo {
   int get hashCode => _id;
 
   @override
-  bool operator ==(Todo t) {
-    return _id == t.id;
+  bool operator ==(dynamic t) {
+    if (t is Todo) {
+      return _id == t.id;
+    }
+    return false;
   }
 }

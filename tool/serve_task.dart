@@ -169,6 +169,7 @@ dynamic appHandler(Request request) {
     'dart_stack_trace_mapper.js',
     'require.js',
     'web__main.js',
+    'main.dart.js',
     'main.dart',
     'service_worker.js',
     'favicon.ico',

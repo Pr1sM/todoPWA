@@ -82,7 +82,7 @@ class TodoAppComponent
     props.store.dispatch(new AddTodoAction(todo));
   }
 
-  _handleToggleTodo(Uuid todoId) {
+  _handleToggleTodo(String todoId) {
     props.store.dispatch(new ToggleTodoAction(todoId));
   }
 }

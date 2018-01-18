@@ -30,14 +30,14 @@ class EditTodoAction implements TodoAppAction {
 
 class RemoveTodoAction implements TodoAppAction {
   final ActionType type;
-  Uuid todoId;
+  String todoId;
 
   RemoveTodoAction(this.todoId) : this.type = ActionType.removeTodo;
 }
 
 class ToggleTodoAction implements TodoAppAction {
   final ActionType type;
-  Uuid todoId;
+  String todoId;
 
   ToggleTodoAction(this.todoId) : this.type = ActionType.toggleTodo;
 }
