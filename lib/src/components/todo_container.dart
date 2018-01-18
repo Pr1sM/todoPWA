@@ -62,83 +62,94 @@ class TodoContainerComponent
   render() {
     if (props.todo == null) {
       return null;
+    } else if (state.editing) {
+      return _renderEditState();
+    } else {
+      return _renderViewState();
     }
+  }
 
+  _renderViewState() {
     ClassNameBuilder builder = new ClassNameBuilder()
       ..add('list-group-item')
-      ..add('list-group-item-success', !state.editing && props.todo.isComplete);
+      ..add('list-group-item-success', props.todo.isComplete);
 
-    if (state.editing) {
-      return (Dom.div()..className = builder.toClassName())(
-        (Dom.form()
-          ..className = 'form-inline'
-          ..onSubmit = _handleSubmit)(
-          (Dom.label()
-            ..className = 'mr-1'
-            ..htmlFor = '${props.key}TodoEditTitle')('Title'),
-          (Dom.input()
-            ..className = 'form-control mr-2'
-            ..id = '${props.key}TodoEditTitle'
-            ..type = 'text'
-            ..value = state.editTitle
-            ..onChange = _handleTitleChange)(),
-          (Dom.label()
-            ..className = 'mr-1'
-            ..htmlFor = '${props.key}TodoEditDesc')('Description'),
-          (Dom.textarea()
-            ..className = 'form-control mr-2'
-            ..id = '${props.key}TodoEditDesc'
-            ..value = state.editDescription
-            ..onChange = _handleDescriptionChange
-            ..rows = 1)(),
-          (Dom.button()
-            ..className = 'btn btn-primary mr-2'
-            ..type = 'submit')(
-            (Dom.span()
-              ..className = 'oi oi-check'
-              ..title = 'check')(),
+    return (Dom.div()
+      ..onClick = _handleContainerClick
+      ..className = builder.toClassName())(
+      (Dom.div()..className = 'container')(
+        (Dom.div()..className = 'row align-items-center')(
+          (Dom.div()..className = 'col-11')(
+            Dom.h4()(props.todo.title),
+            '${props.todo.description}',
           ),
-          (Dom.button()
-            ..className = 'btn'
-            ..onClick = _handleCancel)(
-            (Dom.span()
-              ..className = 'oi oi-x'
-              ..title = 'x')(),
-          ),
-        ),
-      );
-    } else {
-      return (Dom.div()
-        ..onClick = _handleContainerClick
-        ..className = builder.toClassName())(
-        (Dom.div()..className = 'container')(
-          (Dom.div()..className = 'row align-items-center')(
-            (Dom.div()..className = 'col-11')(
-              Dom.h4()(props.todo.title),
-              '${props.todo.description}',
-            ),
-            (Dom.div()..className = 'col-1')(
-              (Dom.div()..className = 'row')(
-                (Dom.div()
-                  ..className = 'col-6'
-                  ..onClick = _handleStartEditing)(
-                  (Dom.span()
-                    ..className = 'oi oi-info'
-                    ..title = 'info')(),
-                ),
-                (Dom.div()
-                  ..className = 'col-6'
-                  ..onClick = _handleRemoveClick)(
-                  (Dom.span()
-                    ..className = 'oi oi-x'
-                    ..title = 'x')(),
-                ),
+          (Dom.div()..className = 'col-1')(
+            (Dom.div()..className = 'row')(
+              (Dom.div()
+                ..className = 'col-6'
+                ..onClick = _handleStartEditing)(
+                (Dom.span()
+                  ..className = 'oi oi-info'
+                  ..title = 'info')(),
+              ),
+              (Dom.div()
+                ..className = 'col-6'
+                ..onClick = _handleRemoveClick)(
+                (Dom.span()
+                  ..className = 'oi oi-x'
+                  ..title = 'x')(),
               ),
             ),
           ),
         ),
-      );
-    }
+      ),
+    );
+  }
+
+  _renderEditState() {
+    return (Dom.div()..className = 'list-group-item')(
+      (Dom.form()
+        ..className = 'form-inline'
+        ..onSubmit = _handleSubmit)(
+        (Dom.label()
+          ..className = 'mr-1'
+          ..htmlFor = '${props.key}TodoEditTitle')('Title'),
+        (Dom.input()
+          ..className = 'form-control mr-2'
+          ..id = '${props.key}TodoEditTitle'
+          ..type = 'text'
+          ..value = state.editTitle
+          ..onChange = _handleTitleChange)(),
+        (Dom.label()
+          ..className = 'mr-1'
+          ..htmlFor = '${props.key}TodoEditDesc')('Description'),
+        (Dom.textarea()
+          ..className = 'form-control mr-2'
+          ..id = '${props.key}TodoEditDesc'
+          ..value = state.editDescription
+          ..onChange = _handleDescriptionChange
+          ..rows = 1)(),
+        (Dom.button()
+          ..className = 'btn btn-primary mr-2'
+          ..type = 'submit')(
+          (Dom.span()
+            ..className = 'oi oi-check'
+            ..title = 'check')(),
+        ),
+        (Dom.button()
+          ..className = 'btn'
+          ..onClick = _handleCancel)(
+          (Dom.span()
+            ..className = 'oi oi-x'
+            ..title = 'x')(),
+        ),
+      ),
+    );
+  }
+
+  _handleCancel(e) {
+    e.preventDefault();
+    setState(getInitialState());
   }
 
   _handleContainerClick(_) {
@@ -147,16 +158,15 @@ class TodoContainerComponent
     }
   }
 
+  _handleDescriptionChange(e) {
+    setState(newState()..editDescription = e.target.value);
+  }
+
   _handleRemoveClick(e) {
     e.stopPropagation();
     if (props.onRemoveClick != null) {
       props.onRemoveClick(props.todo.id);
     }
-  }
-
-  _handleCancel(e) {
-    e.preventDefault();
-    setState(getInitialState());
   }
 
   _handleStartEditing(e) {
@@ -179,9 +189,5 @@ class TodoContainerComponent
 
   _handleTitleChange(e) {
     setState(newState()..editTitle = e.target.value);
-  }
-
-  _handleDescriptionChange(e) {
-    setState(newState()..editDescription = e.target.value);
   }
 }
