@@ -9,6 +9,7 @@ UiFactory<TodoListProps> TodoList;
 @Props()
 class TodoListProps extends UiProps {
   ContainerClickedCallback onContainerClick;
+  EditClickedCallback onEditClick;
   RemoveClickedCallback onRemoveClick;
   List<Todo> todos;
 }
@@ -18,6 +19,7 @@ class TodoListComponent extends UiComponent<TodoListProps> {
   @override
   getDefaultMap() => (newProps()
     ..onContainerClick = null
+    ..onEditClick = null
     ..onRemoveClick = null
     ..todos = []);
 
@@ -32,6 +34,7 @@ class TodoListComponent extends UiComponent<TodoListProps> {
     List todoContainers = props.todos
         .map((todo) => (TodoContainer()
           ..onContainerClick = props.onContainerClick
+          ..onEditClick = props.onEditClick
           ..onRemoveClick = props.onRemoveClick
           ..todo = todo
           ..key = todo.id)())

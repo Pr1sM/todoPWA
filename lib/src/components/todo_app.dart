@@ -33,7 +33,7 @@ class TodoAppComponent
   getDefaultProps() => (newProps()..store = null);
 
   @override
-  getInitalState() => (newState()..appState = null);
+  getInitialState() => (newState()..appState = null);
 
   @override
   componentWillMount() {
@@ -73,6 +73,7 @@ class TodoAppComponent
       (Dom.div()..className = 'row col-md-12')(
         (TodoList()
           ..onContainerClick = _handleToggleTodo
+          ..onEditClick = _handleEditTodo
           ..onRemoveClick = _handleRemoveTodo
           ..todos = state.appState.todos)(),
       ),
@@ -81,6 +82,10 @@ class TodoAppComponent
 
   _handleNewTodo(Todo todo) {
     props.store.dispatch(new AddTodoAction(todo));
+  }
+
+  _handleEditTodo(Todo todo) {
+    props.store.dispatch(new EditTodoAction(todo));
   }
 
   _handleToggleTodo(String todoId) {
