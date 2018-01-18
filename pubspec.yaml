@@ -1,0 +1,25 @@
+name: todopwa
+version: 0.1.0
+description: Classic Todo App written as a Progressive Web App
+author: Srinivas Dhanwada <dhanwads@gmail.com>
+environment:
+  sdk: '>=1.23.0 <2.0.0'
+dependencies:
+  redux: ^2.1.1
+  over_react: ^1.20.0
+dev_dependencies:
+  ansicolor: ^0.0.9
+  args: ^0.13.0
+  coverage: ^0.8.0 # dart_dev is currently untested with coverage ^0.9.0
+  dart_dev: ^1.9.0
+  dart_style: ^1.0.7
+  dart_to_js_script_rewriter: ^1.0.3
+  dartdoc: ^0.13.0
+  shelf: ^0.7.2
+  shelf_proxy: ^0.1.0+4
+  test: ^0.12.24
+  version: ^1.0.2
+
+transformers:
+  - over_react
+  - dart_to_js_script_rewriter
