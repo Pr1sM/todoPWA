@@ -17,6 +17,7 @@ dev_dependencies:
   dart_to_js_script_rewriter: ^1.0.3
   dartdoc: ^0.13.0
   shelf: ^0.7.2
+  shelf_static: ^0.2.7
   shelf_proxy: ^0.1.0+4
   test: ^0.12.24
   version: ^1.0.2
