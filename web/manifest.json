@@ -1,0 +1,41 @@
+{
+  "short_name": "TodoPWA",
+  "name": "Todo PWA",
+  "icons": [
+    {
+      "src": "img/todopwa48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "img/todopwa96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "img/todopwa192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/todopwa256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "img/todopwa384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "img/todopwa512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "background_color": "#2196F3",
+  "theme_color": "#2196F3",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/"
+}

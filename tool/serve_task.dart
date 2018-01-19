@@ -165,6 +165,7 @@ FutureOr<Response> appHandler(Request request) {
     'css/',
     'fonts/',
     'prod/',
+    'img/',
     'sass/',
     'dart_sdk.js',
     'dart_stack_trace_mapper.js',
@@ -172,13 +173,21 @@ FutureOr<Response> appHandler(Request request) {
     'web__main.js',
     'main.dart.js',
     'main.dart',
+    'manifest.json',
     'service_worker.js',
     'favicon.ico',
     'browser_upgrade.html'
   ];
 
   if (!allowedPaths.any((allowed) => path.startsWith(allowed))) {
-    request = _copyRequest(request, request.requestedUri.replace(path: '/'));
+    Uri newPath;
+    if(request.requestedUri.scheme == 'http') {
+      newPath = request.requestedUri.replace(scheme: 'https', path: '/');
+    } else {
+      newPath = request.requestedUri.replace(path: '/');
+    }
+
+    request = _copyRequest(request, newPath);
   }
   return pubServeProxy(request);
 }
