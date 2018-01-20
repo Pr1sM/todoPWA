@@ -79,12 +79,12 @@ class TodoContainerComponent
       ..className = builder.toClassName())(
       (Dom.div()..className = 'container')(
         (Dom.div()..className = 'row align-items-center')(
-          (Dom.div()..className = 'col-11')(
+          (Dom.div()..className = 'col-10')(
             Dom.h4()(props.todo.title),
             '${props.todo.description}',
           ),
-          (Dom.div()..className = 'col-1')(
-            (Dom.div()..className = 'row')(
+          (Dom.div()..className = 'col-2')(
+            (Dom.div()..className = 'row align-items-center')(
               (Dom.div()
                 ..className = 'col-6'
                 ..onClick = _handleStartEditing)(

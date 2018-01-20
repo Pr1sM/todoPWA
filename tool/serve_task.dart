@@ -181,7 +181,7 @@ FutureOr<Response> appHandler(Request request) {
 
   if (!allowedPaths.any((allowed) => path.startsWith(allowed))) {
     Uri newPath;
-    if(request.requestedUri.scheme == 'http') {
+    if (request.requestedUri.scheme == 'http') {
       newPath = request.requestedUri.replace(scheme: 'https', path: '/');
     } else {
       newPath = request.requestedUri.replace(path: '/');
